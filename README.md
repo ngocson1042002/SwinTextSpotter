@@ -34,16 +34,14 @@ synergy on text spotting tasks. [Code](https://github.com/mxin262/ESTextSpotter)
 ## Steps
 1. Install the repository (we recommend to use [Anaconda](https://www.anaconda.com/) for installation.)
 ```
-conda create -n SWINTS python=3.8 -y
-conda activate SWINTS
-conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=11.1 -c pytorch -c conda-forge
-pip install opencv-python
-pip install scipy
-pip install shapely
-pip install rapidfuzz
-pip install timm
-pip install Polygon3
-git clone https://github.com/mxin262/SwinTextSpotter.git
+pip install -qq pycocotools
+pip install -qq editdistance
+pip install -q timm shapely rapidfuzz Polygon3
+pip install -q omegaconf
+pip install -q Pillow==8.4.0
+pip install -q rapidfuzz==2.15.0
+pip install -q git+https://github.com/facebookresearch/fvcore
+git clone https://github.com/ngocson1042002/SwinTextSpotter.git
 cd SwinTextSpotter
 python setup.py build develop
 ```
