@@ -189,7 +189,7 @@ class SWINTS(nn.Module):
             return loss_dict
 
         else:
-            outputs_class, outputs_coord, outputs_mask,out_rec = self.head(features, proposal_boxes, proposal_feats, mask_encoding=self.mask_encoding)
+            outputs_class, outputs_coord, outputs_mask,out_rec, rec_features, det_features = self.head(features, proposal_boxes, proposal_feats, mask_encoding=self.mask_encoding)
             output = {'pred_logits': outputs_class[-1], 'pred_boxes': outputs_coord[-1], 'pred_masks': outputs_mask[-1]}
             box_cls = output["pred_logits"]
             box_pred = output["pred_boxes"]
@@ -199,6 +199,8 @@ class SWINTS(nn.Module):
             results.scores = box_cls
             results.pred_masks = mask_pred.squeeze(1)
             results.pred_rec = out_rec
+            results.rec_features = rec_features
+            results.det_features = det_features
             results = [results]
             processed_results = []
             for results_per_image, input_per_image, image_size in zip(results, batched_inputs, images.image_sizes):

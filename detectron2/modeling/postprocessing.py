@@ -57,7 +57,7 @@ def detector_postprocess(
 
     output_boxes.scale(scale_x, scale_y)
     output_boxes.clip(results.image_size)
-
+    results = results.to(output_boxes.nonempty().device)
     results = results[output_boxes.nonempty()]
 
     if results.has("pred_masks"):
